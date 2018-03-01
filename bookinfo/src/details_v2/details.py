@@ -57,7 +57,7 @@ def get_book_details():
     return json.dumps(
             [{
                 'id' : 123,
-                'author': 'William Shakespeare',
+                'author': 'William YesShakespeare',
                 'year': 1595,
                 'type' : 'paperback',
                 'pages' : 200,
@@ -70,16 +70,16 @@ def get_book_details():
 
 
 @app.route('/details/<book_id>')
-def get_book_details():
+def get_book_details_with_bookid(book_id):
     return json.dumps(
             [{
-                'id' : book_id,
-                'author': 'William Shakespeare',
+                'id' : 456,
+                'author': 'William NoShakespeare',
                 'year': 1595,
                 'type' : 'paperback',
                 'pages' : 200,
-                'publisher' : 'PublisherA',
-                'language' : 'English',
+                'publisher' : 'PublisherB',
+                'language' : 'French',
                 'ISBN-10' : '1234567890',
                 'ISBN-13' : '123-1234567890'
             }]

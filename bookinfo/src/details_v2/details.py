@@ -56,7 +56,7 @@ def health():
 def get_book_details():
     return json.dumps(
             [{
-                'id' : book_id,
+                'id' : 123,
                 'author': 'William Shakespeare',
                 'year': 1595,
                 'type' : 'paperback',

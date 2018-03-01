@@ -52,12 +52,25 @@ def health():
             }]
         ), 200, {'Content-Type': 'application/json'}
 
+@app.route('/details')
+def get_book_details():
+    return json.dumps(
+            [{
+                'id' : book_id,
+                'author': 'William Shakespeare',
+                'year': 1595,
+                'type' : 'paperback',
+                'pages' : 200,
+                'publisher' : 'PublisherA',
+                'language' : 'English',
+                'ISBN-10' : '1234567890',
+                'ISBN-13' : '123-1234567890'
+            }]
+        ), 200, {'Content-Type': 'application/json'}
+
 
 @app.route('/details/<book_id>')
-def get_book_details(book_id):
-    if book_id is None:
-        # TODO: Handle default use case
-        book_id = 123
+def get_book_details():
     return json.dumps(
             [{
                 'id' : book_id,

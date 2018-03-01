@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
       - name: details
-        image: sidhshar/examples-bookinfo-details-v1:latest
+        image: sidhshar/examples-bookinfo-details-v2:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080

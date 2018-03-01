@@ -55,6 +55,9 @@ def health():
 
 @app.route('/details/<book_id>')
 def get_book_details(book_id):
+    if book_id is None:
+        # TODO: Handle default use case
+        book_id = 123
     return json.dumps(
             [{
                 'id' : book_id,

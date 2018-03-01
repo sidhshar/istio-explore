@@ -15,7 +15,7 @@
 ##################################################################################################
 # Details service
 ##################################################################################################
-apiVersion: v1
+apiVersion: v2
 kind: Service
 metadata:
   name: details
@@ -28,17 +28,17 @@ spec:
   selector:
     app: details
 ---
-apiVersion: extensions/v1beta1
+apiVersion: extensions/v2beta1
 kind: Deployment
 metadata:
-  name: details-v1
+  name: details-v2
 spec:
   replicas: 1
   template:
     metadata:
       labels:
         app: details
-        version: v1
+        version: v2
     spec:
       containers:
       - name: details

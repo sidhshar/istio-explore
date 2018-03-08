@@ -60,7 +60,9 @@ def get_book_details(id, headers)
     if ENV['ENABLE_EXTERNAL_BOOK_SERVICE'] === 'true' then
       # the ISBN of one of Comedy of Errors on the Amazon
       # that has Shakespeare as the single author
-        isbn = '0486424618'
+        #isbn = '0486424618'
+      # the ISBN of The Taming of the Shrew (Cambridge School Shakespeare)
+        isbn = '0521425050'
         return fetch_details_from_external_service(isbn, id, headers)
     end
 

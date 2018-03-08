@@ -41,7 +41,7 @@ import javax.ws.rs.core.Response;
 public class LibertyRestEndpoint extends Application {
 
     private final static Boolean ratings_enabled = Boolean.valueOf(System.getenv("ENABLE_RATINGS"));
-    private final static String star_color = System.getenv("STAR_COLOR") == null ? "black" : System.getenv("STAR_COLOR");
+    private final static String star_color = System.getenv("STAR_COLOR") == null ? "blue" : System.getenv("STAR_COLOR");
     private final static String ratings_service = "http://ratings:9080/ratings";
     
     private String getJsonResponse (String productId, int starsReviewer1, int starsReviewer2) {
@@ -51,8 +51,9 @@ public class LibertyRestEndpoint extends Application {
     	
     	// reviewer 1:
     	result += "{";
-    	result += "  \"reviewer\": \"Reviewer1\",";
-    	result += "  \"text\": \"An extremely entertaining play by Shakespeare. The slapstick humour is refreshing!\"";
+    	result += "  \"reviewer\": \"Sally\",";
+      result += "  \"text\": \"The humour is refreshing!\"";
+    	//result += "  \"text\": \"An extremely entertaining play by Shakespeare. The slapstick humour is refreshing!\"";
       if (ratings_enabled) {
         if (starsReviewer1 != -1) {
           result += ", \"rating\": {\"stars\": " + starsReviewer1 + ", \"color\": \"" + star_color + "\"}";
@@ -65,8 +66,8 @@ public class LibertyRestEndpoint extends Application {
     	
     	// reviewer 2:
     	result += "{";
-    	result += "  \"reviewer\": \"Reviewer2\",";
-    	result += "  \"text\": \"Absolutely fun and entertaining. The play lacks thematic depth when compared to other plays by Shakespeare.\"";
+    	result += "  \"reviewer\": \"Molly\",";
+    	result += "  \"text\": \"The play lacks variety!\"";
       if (ratings_enabled) {
         if (starsReviewer2 != -1) {
           result += ", \"rating\": {\"stars\": " + starsReviewer2 + ", \"color\": \"" + star_color + "\"}";
@@ -155,11 +156,11 @@ public class LibertyRestEndpoint extends Application {
         if (ratingsResponse != null) {
           if (ratingsResponse.containsKey("ratings")) {
             JsonObject ratings = ratingsResponse.getJsonObject("ratings");
-            if (ratings.containsKey("Reviewer1")){
-          	  starsReviewer1 = ratings.getInt("Reviewer1");
+            if (ratings.containsKey("Sally")){
+          	  starsReviewer1 = ratings.getInt("Sally");
             }
-            if (ratings.containsKey("Reviewer2")){
-              starsReviewer2 = ratings.getInt("Reviewer2");
+            if (ratings.containsKey("Molly")){
+              starsReviewer2 = ratings.getInt("Molly");
             }
           }
         }

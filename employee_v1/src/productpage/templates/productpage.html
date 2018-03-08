@@ -31,15 +31,15 @@ $('#login-modal').on('shown.bs.modal', function () {
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">BookInfo Sample</a>
+            <a class="navbar-brand" href="#">Custom Header</a>
         </div>
         {% if user: %}
         <p class="navbar-text navbar-right">
             <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
-            <span style="padding-left: 5px;">{{ user }}  ( <a href="logout">sign out</a> )</span>
+            <span style="padding-left: 5px;">{{ user }}  ( <a href="logout">SignOut</a> )</span>
         </p>
         {% else %}
-        <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal" href="#login-modal">Sign in</button>
+        <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal" href="#login-modal">SignIn</button>
         {% endif %}
     </div>
 </nav>
@@ -96,7 +96,7 @@ $('#login-modal').on('shown.bs.modal', function () {
     <div class="col-md-12">
       <h3 class="text-center text-primary">{{ product.title }}</h3>
       {% autoescape false %}
-        <p>Summary: {{ product.descriptionHtml }}</p>
+        <p>Summary will be here: {{ product.descriptionHtml }}</p>
       {% endautoescape %}
     </div>
   </div>
@@ -114,7 +114,7 @@ $('#login-modal').on('shown.bs.modal', function () {
           <dt>ISBN-13:</dt>{{ details['ISBN-13'] }}
         </dl>
       {% else %}
-        <h4 class="text-center text-primary">Error fetching product details!</h4>
+        <h4 class="text-center text-primary">Error fetching product details! (In productpage.html h4 1)</h4>
         {% if details: %}
           <p>{{ details.error }}</p>
         {% endif %}
@@ -123,7 +123,7 @@ $('#login-modal').on('shown.bs.modal', function () {
 
     <div class="col-md-6">
       {% if reviewsStatus == 200: %}
-        <h4 class="text-center text-primary">Book Reviews</h4>
+        <h4 class="text-center text-primary">Custom Reviews</h4>
         {% for review in reviews.reviews %}
           <blockquote>
             <p>{{ review.text }}</p>
@@ -147,7 +147,7 @@ $('#login-modal').on('shown.bs.modal', function () {
           </blockquote>
         {% endfor %}
       {% else %}
-        <h4 class="text-center text-primary">Error fetching product reviews!</h4>
+        <h4 class="text-center text-primary">Error fetching product reviews! (In productpage.html h4 2)</h4>
         {% if reviews: %}
           <p>{{ reviews.error }}</p>
         {% endif %}

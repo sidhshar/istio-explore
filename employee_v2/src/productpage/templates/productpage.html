@@ -31,15 +31,15 @@ $('#login-modal').on('shown.bs.modal', function () {
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">BookInfo Sample</a>
+            <a class="navbar-brand" href="#">Employee Sample</a>
         </div>
         {% if user: %}
         <p class="navbar-text navbar-right">
             <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
-            <span style="padding-left: 5px;">{{ user }}  ( <a href="logout">sign out</a> )</span>
+            <span style="padding-left: 5px;">{{ user }}  ( <a href="logout">SignOut</a> )</span>
         </p>
         {% else %}
-        <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal" href="#login-modal">Sign in</button>
+        <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal" href="#login-modal">SignIn</button>
         {% endif %}
     </div>
 </nav>

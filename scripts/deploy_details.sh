@@ -1,6 +1,6 @@
 
 
-BASEPATH = /home/sidhshar/repo/istio-explore/bookinfo/src
+BASEPATH="/home/sidhshar/repo/istio-explore/bookinfo/src"
 
 cd $BASEPATH/details
 

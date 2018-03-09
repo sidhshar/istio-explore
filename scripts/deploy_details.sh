@@ -1,6 +1,9 @@
 
 
-cd /home/sidhshar/repo/istio-explore/employee_v1/src/details
+BASEPATH = /home/sidhshar/repo/istio-explore/bookinfo/src
+
+cd $BASEPATH/details
+
 docker build -t details .
 docker tag details sidhshar/examples-bookinfo-details-v1
 docker push sidhshar/examples-bookinfo-details-v1

@@ -43,7 +43,7 @@ spec:
       containers:
       - name: details
         image: sidhshar/examples-bookinfo-details-v1:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 9080
 ---
@@ -78,7 +78,7 @@ spec:
       containers:
       - name: ratings
         image: sidhshar/examples-bookinfo-ratings-v1:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 9080
 ---
@@ -113,7 +113,7 @@ spec:
       containers:
       - name: reviews
         image: sidhshar/examples-bookinfo-reviews-v1:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 9080
 ---
@@ -132,7 +132,7 @@ spec:
       containers:
       - name: reviews
         image: sidhshar/examples-bookinfo-reviews-v2:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 9080
 ---
@@ -151,7 +151,7 @@ spec:
       containers:
       - name: reviews
         image: sidhshar/examples-bookinfo-reviews-v3:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 9080
 ---
@@ -186,7 +186,7 @@ spec:
       containers:
       - name: productpage
         image: sidhshar/examples-bookinfo-productpage-v1:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 9080
 ---

@@ -184,7 +184,7 @@ def getProducts():
         {
             'id': 0,
             'title': 'Much Ado About Nothing',
-            'descriptionHtml': '<a href="https://en.wikipedia.org/wiki/The_Comedy_of_Errors">Wikipedia Summary</a>: The Comedy of Errors is one of <b>William Shakespeare\'s</b> early plays. It is his shortest and one of his most farcical comedies, with a major part of the humour coming from slapstick and mistaken identity, in addition to puns and word play.'
+            'descriptionHtml': '<a href="https://en.wikipedia.org/wiki/Much_Ado_About_Nothing">Wikipedia Summary</a>: Much Ado About Nothing is a comedy by <b>William Shakespeare</b> thought to have been written in 1598 and 1599, as Shakespeare was approaching the middle of his career. The play was included in the First Folio, published in 1623.'
         }
     ]
 

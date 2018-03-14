@@ -31,7 +31,7 @@ trap 'INT' do server.shutdown end
 
 server.mount_proc '/health' do |req, res|
     res.status = 200
-    res.body = {'status' => 'Details is healthy'}.to_json
+    res.body = {'status' => 'E Details is healthy'}.to_json
     res['Content-Type'] = 'application/json'
 end
 
@@ -67,13 +67,13 @@ def get_book_details(id, headers)
     return {
         'id' => id,
         'author': 'William Shakespeare',
-        'year': 1595,
-        'type' => 'paperback',
+        'year': 1598,
+        'type' => 'ebook',
         'pages' => 200,
-        'publisher' => 'PublisherA',
-        'language' => 'English',
-        'ISBN-10' => '1234567890',
-        'ISBN-13' => '123-1234567890'
+        'publisher' => 'Wiley',
+        'language' => 'Hindi',
+        'ISBN-10' => '0987654321',
+        'ISBN-13' => '123-0987654321'
     }
 end
 

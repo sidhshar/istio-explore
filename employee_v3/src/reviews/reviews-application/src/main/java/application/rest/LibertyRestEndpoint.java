@@ -41,7 +41,7 @@ import javax.ws.rs.core.Response;
 public class LibertyRestEndpoint extends Application {
 
     private final static Boolean ratings_enabled = Boolean.valueOf(System.getenv("ENABLE_RATINGS"));
-    private final static String star_color = System.getenv("STAR_COLOR") == null ? "black" : System.getenv("STAR_COLOR");
+    private final static String star_color = System.getenv("STAR_COLOR") == null ? "brown" : System.getenv("STAR_COLOR");
     private final static String ratings_service = "http://ratings:9080/ratings";
     
     private String getJsonResponse (String productId, int starsReviewer1, int starsReviewer2) {
@@ -52,13 +52,13 @@ public class LibertyRestEndpoint extends Application {
     	// reviewer 1:
     	result += "{";
     	result += "  \"reviewer\": \"Reviewer1\",";
-    	result += "  \"text\": \"An extremely entertaining play by Shakespeare. The slapstick humour is refreshing!\"";
+    	result += "  \"text\": \"I am Reviewer1!\"";
       if (ratings_enabled) {
         if (starsReviewer1 != -1) {
           result += ", \"rating\": {\"stars\": " + starsReviewer1 + ", \"color\": \"" + star_color + "\"}";
         }
         else {
-          result += ", \"rating\": {\"error\": \"Ratings service is currently unavailable\"}";
+          result += ", \"rating\": {\"error\": \"E Ratings service is currently unavailable\"}";
         }
       }
     	result += "},";
@@ -66,13 +66,13 @@ public class LibertyRestEndpoint extends Application {
     	// reviewer 2:
     	result += "{";
     	result += "  \"reviewer\": \"Reviewer2\",";
-    	result += "  \"text\": \"Absolutely fun and entertaining. The play lacks thematic depth when compared to other plays by Shakespeare.\"";
+    	result += "  \"text\": \"I am Reviewer2.\"";
       if (ratings_enabled) {
         if (starsReviewer2 != -1) {
           result += ", \"rating\": {\"stars\": " + starsReviewer2 + ", \"color\": \"" + star_color + "\"}";
         }
         else {
-          result += ", \"rating\": {\"error\": \"Ratings service is currently unavailable\"}";
+          result += ", \"rating\": {\"error\": \"E Ratings service is currently unavailable\"}";
         }
       }
     	result += "}";
@@ -133,7 +133,7 @@ public class LibertyRestEndpoint extends Application {
     @GET
     @Path("/health")
     public Response health() {
-        return Response.ok().type(MediaType.APPLICATION_JSON).entity("{\"status\": \"Reviews is healthy\"}").build();
+        return Response.ok().type(MediaType.APPLICATION_JSON).entity("{\"status\": \"E Reviews is healthy\"}").build();
     }
 
     @GET

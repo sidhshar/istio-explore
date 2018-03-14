@@ -69,7 +69,7 @@ def get_book_details(id, headers)
         'author': 'William Shakespeare',
         'year': 1598,
         'type' => 'ebook',
-        'pages' => 200,
+        'pages' => 300,
         'publisher' => 'Wiley',
         'language' => 'Hindi',
         'ISBN-10' => '0987654321',

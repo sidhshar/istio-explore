@@ -1,5 +1,5 @@
 
-BASEPATH="/home/sidhshar/repo/istio-explore/bookinfo/src"
+BASEPATH="/home/sidhshar/repo/istio-explore/employee_v3/src"
 
 cd $BASEPATH/reviews
 docker run --rm -v `pwd`:/usr/bin/app:rw niaquinto/gradle clean build
@@ -20,7 +20,7 @@ docker push sidhshar/examples-bookinfo-reviews-v2
 cd $BASEPATH/reviews
 docker run --rm -v `pwd`:/usr/bin/app:rw niaquinto/gradle clean build
 cd reviews-wlpcfg
-docker build -t reviews-v3 --build-arg service_version=v3 --build-arg enable_ratings=true --build-arg star_color=yellow .
+docker build -t reviews-v3 --build-arg service_version=v3 --build-arg enable_ratings=true --build-arg star_color=green .
 docker tag reviews-v3 sidhshar/examples-bookinfo-reviews-v3
 docker push sidhshar/examples-bookinfo-reviews-v3
 

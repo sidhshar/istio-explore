@@ -149,6 +149,23 @@ def front():
         reviews=reviews,
         user=user)
 
+@app.route('/employeepage')
+def front():
+    product_id = 0 # TODO: replace default value
+    headers = getForwardHeaders(request)
+    user = request.cookies.get("user", "")
+    product = getProduct(product_id)
+    detailsStatus, details = getProductDetails(product_id, headers)
+    reviewsStatus, reviews = getProductReviews(product_id, headers)
+    return render_template(
+        'employeepage.html',
+        detailsStatus=detailsStatus,
+        reviewsStatus=reviewsStatus,
+        product=product,
+        details=details,
+        reviews=reviews,
+        user=user)
+
 
 # The API:
 @app.route('/api/v1/products')

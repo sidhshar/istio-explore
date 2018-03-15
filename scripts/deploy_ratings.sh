@@ -1,7 +1,7 @@
 
 
 
-BASEPATH="/home/sidhshar/repo/istio-explore/employee_v3/src"
+BASEPATH="/home/sidhshar/repo/istio-explore/employee_v4/src"
 
 cd $BASEPATH/ratings
 

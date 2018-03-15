@@ -66,7 +66,7 @@ public class LibertyRestEndpoint extends Application {
     	// reviewer 2:
     	result += "{";
     	result += "  \"reviewer\": \"Q4FY17\",";
-    	result += "  \"text\": \"20000\"";
+    	result += "  \"text\": \"15000\"";
       if (ratings_enabled) {
         if (starsReviewer2 != -1) {
           result += ", \"rating\": {\"stars\": " + starsReviewer2 + ", \"color\": \"" + star_color + "\"}";

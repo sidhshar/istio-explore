@@ -131,7 +131,7 @@ function getLocalReviews (productId) {
     ratings: {
       'Q2FY18': 4,
       'Q4FY17': 2,
-      'Q2FY17': 5,
+      'Q2FY17': 1,
     }
   }
 }

@@ -150,7 +150,7 @@ def front():
         user=user)
 
 @app.route('/employeepage')
-def front():
+def employeeFront():
     product_id = 0 # TODO: replace default value
     headers = getForwardHeaders(request)
     user = request.cookies.get("user", "")

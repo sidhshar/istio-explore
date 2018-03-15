@@ -184,7 +184,8 @@ def getProducts():
         {
             'id': 0,
             'title': 'Employee Name: T. Baker',
-            'descriptionHtml': 'Sales Executive, SBG Cisco'
+            'descriptionHtml': 'TME',
+            'departmentHtml': 'CSG'
         }
     ]
 

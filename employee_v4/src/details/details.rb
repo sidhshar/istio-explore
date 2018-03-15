@@ -66,9 +66,9 @@ def get_book_details(id, headers)
 
     return {
         'id' => id,
-        'type' => 'employee',
+        'type' => 'Employee',
         'pages' => 'A9-1',
-        'publisher' => 'SJC19/4',
+        'publisher' => 'SJC 19/4',
         'language' => 'Bret',
         'ISBN-10' => '+1 408 527 3322',
         'ISBN-13' => '+1 408 821 0297',

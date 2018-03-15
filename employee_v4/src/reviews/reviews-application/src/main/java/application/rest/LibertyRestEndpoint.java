@@ -79,7 +79,7 @@ public class LibertyRestEndpoint extends Application {
 
       // reviewer 3:
       result += "{";
-      result += "  \"reviewer\": \"Reviewer3\",";
+      result += "  \"reviewer\": \"Q2FY17\",";
       result += "  \"text\": \"5000\"";
       if (ratings_enabled) {
         if (starsReviewer2 != -1) {
@@ -176,8 +176,8 @@ public class LibertyRestEndpoint extends Application {
             if (ratings.containsKey("Reviewer2")){
               starsReviewer2 = ratings.getInt("Reviewer2");
             }
-            if (ratings.containsKey("Reviewer3")){
-              starsReviewer3 = ratings.getInt("Reviewer3");
+            if (ratings.containsKey("Q2FY17")){
+              starsReviewer3 = ratings.getInt("Q2FY17");
             }
 
           }

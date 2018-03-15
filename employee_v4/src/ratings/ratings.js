@@ -72,8 +72,8 @@ dispatcher.onGet(/^\/ratings\/[0-9]*/, function (req, res) {
           var result = {
             id: productId,
             ratings: {
-              Reviewer1: firstRating,
-              Reviewer2: secondRating,
+              Q2FY18: firstRating,
+              Q4FY17: secondRating,
               Q2FY17: thirdRating
             }
           }
@@ -100,8 +100,8 @@ dispatcher.onGet(/^\/ratings\/[0-9]*/, function (req, res) {
               var result = {
                 id: productId,
                 ratings: {
-                  Reviewer1: firstRating,
-                  Reviewer2: secondRating,
+                  Q2FY18: firstRating,
+                  Q4FY17: secondRating,
                   Q2FY17: thirdRating
                 }
               }
@@ -129,8 +129,8 @@ function getLocalReviews (productId) {
   return {
     id: productId,
     ratings: {
-      'Reviewer1': 3,
-      'Reviewer2': 1,
+      'Q2FY18': 4,
+      'Q4FY17': 2,
       'Q2FY17': 5,
     }
   }

@@ -51,8 +51,8 @@ public class LibertyRestEndpoint extends Application {
     	
     	// reviewer 1:
     	result += "{";
-    	result += "  \"reviewer\": \"Reviewer1\",";
-    	result += "  \"text\": \"20000!\"";
+    	result += "  \"reviewer\": \"Q2FY18\",";
+    	result += "  \"text\": \"25000\"";
       if (ratings_enabled) {
         if (starsReviewer1 != -1) {
           result += ", \"rating\": {\"stars\": " + starsReviewer1 + ", \"color\": \"" + star_color + "\"}";
@@ -65,8 +65,8 @@ public class LibertyRestEndpoint extends Application {
 
     	// reviewer 2:
     	result += "{";
-    	result += "  \"reviewer\": \"Reviewer2\",";
-    	result += "  \"text\": \"10000\"";
+    	result += "  \"reviewer\": \"Q4FY17\",";
+    	result += "  \"text\": \"20000\"";
       if (ratings_enabled) {
         if (starsReviewer2 != -1) {
           result += ", \"rating\": {\"stars\": " + starsReviewer2 + ", \"color\": \"" + star_color + "\"}";
@@ -80,7 +80,7 @@ public class LibertyRestEndpoint extends Application {
       // reviewer 3:
       result += "{";
       result += "  \"reviewer\": \"Q2FY17\",";
-      result += "  \"text\": \"5000\"";
+      result += "  \"text\": \"10000\"";
       if (ratings_enabled) {
         if (starsReviewer2 != -1) {
           result += ", \"rating\": {\"stars\": " + starsReviewer3 + ", \"color\": \"" + star_color + "\"}";
@@ -170,11 +170,11 @@ public class LibertyRestEndpoint extends Application {
         if (ratingsResponse != null) {
           if (ratingsResponse.containsKey("ratings")) {
             JsonObject ratings = ratingsResponse.getJsonObject("ratings");
-            if (ratings.containsKey("Reviewer1")){
-          	  starsReviewer1 = ratings.getInt("Reviewer1");
+            if (ratings.containsKey("Q2FY18")){
+          	  starsReviewer1 = ratings.getInt("Q2FY18");
             }
-            if (ratings.containsKey("Reviewer2")){
-              starsReviewer2 = ratings.getInt("Reviewer2");
+            if (ratings.containsKey("Q4FY17")){
+              starsReviewer2 = ratings.getInt("Q4FY17");
             }
             if (ratings.containsKey("Q2FY17")){
               starsReviewer3 = ratings.getInt("Q2FY17");

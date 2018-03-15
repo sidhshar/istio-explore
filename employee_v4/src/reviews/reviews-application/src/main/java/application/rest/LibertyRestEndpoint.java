@@ -41,10 +41,10 @@ import javax.ws.rs.core.Response;
 public class LibertyRestEndpoint extends Application {
 
     private final static Boolean ratings_enabled = Boolean.valueOf(System.getenv("ENABLE_RATINGS"));
-    private final static String star_color = System.getenv("STAR_COLOR") == null ? "brown" : System.getenv("STAR_COLOR");
+    private final static String star_color = System.getenv("STAR_COLOR") == null ? "orange" : System.getenv("STAR_COLOR");
     private final static String ratings_service = "http://ratings:9080/ratings";
     
-    private String getJsonResponse (String productId, int starsReviewer1, int starsReviewer2) {
+    private String getJsonResponse (String productId, int starsReviewer1, int starsReviewer2, int starsReviewer3) {
     	String result = "{";
     	result += "\"id\": \"" + productId + "\",";
     	result += "\"reviews\": [";
@@ -62,7 +62,7 @@ public class LibertyRestEndpoint extends Application {
         }
       }
     	result += "},";
-    	
+
     	// reviewer 2:
     	result += "{";
     	result += "  \"reviewer\": \"Reviewer2\",";
@@ -75,7 +75,21 @@ public class LibertyRestEndpoint extends Application {
           result += ", \"rating\": {\"error\": \"E Ratings service is currently unavailable\"}";
         }
       }
-    	result += "}";
+    	result += "},";
+
+      // reviewer 3:
+      result += "{";
+      result += "  \"reviewer\": \"Reviewer3\",";
+      result += "  \"text\": \"5000\"";
+      if (ratings_enabled) {
+        if (starsReviewer2 != -1) {
+          result += ", \"rating\": {\"stars\": " + starsReviewer3 + ", \"color\": \"" + star_color + "\"}";
+        }
+        else {
+          result += ", \"rating\": {\"error\": \"E Ratings service is currently unavailable\"}";
+        }
+      }
+      result += "}";
     	
     	result += "]";
     	result += "}";
@@ -149,6 +163,7 @@ public class LibertyRestEndpoint extends Application {
                                     @HeaderParam("x-ot-span-context") String xotspan) {
       int starsReviewer1 = -1;
       int starsReviewer2 = -1;
+      int starsReviewer3 = -1;
 
       if (ratings_enabled) {
         JsonObject ratingsResponse = getRatings(Integer.toString(productId), user, xreq, xtraceid, xspanid, xparentspanid, xsampled, xflags, xotspan);
@@ -161,11 +176,15 @@ public class LibertyRestEndpoint extends Application {
             if (ratings.containsKey("Reviewer2")){
               starsReviewer2 = ratings.getInt("Reviewer2");
             }
+            if (ratings.containsKey("Reviewer3")){
+              starsReviewer3 = ratings.getInt("Reviewer3");
+            }
+
           }
         }
       } 
 
-      String jsonResStr = getJsonResponse(Integer.toString(productId), starsReviewer1, starsReviewer2);
+      String jsonResStr = getJsonResponse(Integer.toString(productId), starsReviewer1, starsReviewer2, starsReviewer3);
       return Response.ok().type(MediaType.APPLICATION_JSON).entity(jsonResStr).build();
     }
 }

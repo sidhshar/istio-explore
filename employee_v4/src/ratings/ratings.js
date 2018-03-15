@@ -43,6 +43,7 @@ dispatcher.onGet(/^\/ratings\/[0-9]*/, function (req, res) {
   } else if (process.env.SERVICE_VERSION === 'v2') {
     var firstRating = 0
     var secondRating = 0
+    var thirdRating = 0
 
     if (process.env.DB_TYPE === 'mysql') {
       var connection = mysql.createConnection({
@@ -65,11 +66,15 @@ dispatcher.onGet(/^\/ratings\/[0-9]*/, function (req, res) {
           if (results[1]) {
             secondRating = results[1].Rating
           }
+          if (results[2]) {
+            thirdRating = results[2].Rating
+          }
           var result = {
             id: productId,
             ratings: {
               Reviewer1: firstRating,
-              Reviewer2: secondRating
+              Reviewer2: secondRating,
+              Reviewer3: thirdRating
             }
           }
           res.writeHead(200, {'Content-type': 'application/json'})
@@ -91,11 +96,13 @@ dispatcher.onGet(/^\/ratings\/[0-9]*/, function (req, res) {
             } else {
               firstRating = data[0].rating
               secondRating = data[1].rating
+              thirdRating = data[2].rating
               var result = {
                 id: productId,
                 ratings: {
                   Reviewer1: firstRating,
-                  Reviewer2: secondRating
+                  Reviewer2: secondRating,
+                  Reviewer3: thirdRating
                 }
               }
               res.writeHead(200, {'Content-type': 'application/json'})
@@ -123,7 +130,8 @@ function getLocalReviews (productId) {
     id: productId,
     ratings: {
       'Reviewer1': 3,
-      'Reviewer2': 1
+      'Reviewer2': 1,
+      'Reviewer3': 5,
     }
   }
 }

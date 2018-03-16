@@ -56,6 +56,18 @@ financedetails = {
     "children" : []
 }
 
+workexpdetails = {
+    "name" : "http://workexpdetails:9080",
+    "endpoint" : "workexpdetails",
+    "children" : []
+}
+
+hrdetails = {
+    "name" : "http://hrdetails:9080",
+    "endpoint" : "hrdetails",
+    "children" : []
+}
+
 ratings = {
     "name" : "http://ratings:9080",
     "endpoint" : "ratings",
@@ -166,19 +178,22 @@ def employeeFront():
 
     #financeStatus, financeData = 200, {'type':'financeData'}
     financeStatus, financeData = getFinanceDetails(product_id, headers)
-    profileStatus, profileData = 200, {'type':'profileData'}
+    workexpStatus, workexpData = getWorkExpDetails(product_id, headers)
+    hrStatus, hrData = getHRDetails(product_id, headers)
 
     return render_template(
         'employeepage.html',
         detailsStatus=detailsStatus,
         reviewsStatus=reviewsStatus,
         financeStatus=financeStatus,
-        profileStatus=profileStatus,
+        workexpStatus=workexpStatus,
+        hrStatus=hrStatus,
         product=product,
         details=details,
         reviews=reviews,
         financeData=financeData,
-        profileData=profileData,
+        workexpData=workexpData,
+        hrData=hrData,
         user=user)
 
 
@@ -252,7 +267,31 @@ def getFinanceDetails(product_id, headers):
         return 200, res.json()
     else:
         status = res.status_code if res is not None and res.status_code else 500
-        return status, {'error': 'Sorry, Finance details are currently unavailable for this book.'}
+        return status, {'error': 'Sorry, Finance details are currently unavailable for this employee.'}
+
+def getWorkExpDetails(product_id, headers):
+    try:
+        url = workexpdetails['name'] + "/" + workexpdetails['endpoint'] + "/" + str(product_id)
+        res = requests.get(url, headers=headers, timeout=3.0)
+    except:
+        res = None
+    if res and res.status_code == 200:
+        return 200, res.json()
+    else:
+        status = res.status_code if res is not None and res.status_code else 500
+        return status, {'error': 'Sorry, Work Exp details are currently unavailable for this employee.'}
+
+def getHRDetails(product_id, headers):
+    try:
+        url = hrdetails['name'] + "/" + hrdetails['endpoint'] + "/" + str(product_id)
+        res = requests.get(url, headers=headers, timeout=3.0)
+    except:
+        res = None
+    if res and res.status_code == 200:
+        return 200, res.json()
+    else:
+        status = res.status_code if res is not None and res.status_code else 500
+        return status, {'error': 'Sorry, HR details are currently unavailable for this employee.'}
 
 
 def getProductReviews(product_id, headers):

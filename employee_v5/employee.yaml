@@ -83,6 +83,76 @@ spec:
         - containerPort: 9080
 ---
 ##################################################################################################
+# Work Exp Details service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: workexpdetails
+  labels:
+    app: workexpdetails
+spec:
+  ports:
+  - port: 9080
+    name: http
+  selector:
+    app: workexpdetails
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: workexpdetails-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: workexpdetails
+        version: v2
+    spec:
+      containers:
+      - name: workexpdetails
+        image: sidhshar/examples-bookinfo-workexpdetails-v1:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9080
+---
+##################################################################################################
+# HR Details service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: hrdetails
+  labels:
+    app: hrdetails
+spec:
+  ports:
+  - port: 9080
+    name: http
+  selector:
+    app: hrdetails
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hrdetails-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hrdetails
+        version: v2
+    spec:
+      containers:
+      - name: hrdetails
+        image: sidhshar/examples-bookinfo-hrdetails-v1:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9080
+---
+##################################################################################################
 # Ratings service
 ##################################################################################################
 apiVersion: v1

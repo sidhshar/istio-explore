@@ -1,5 +1,5 @@
 
-BASEPATH="/home/sidhshar/repo/istio-explore/employee_v4/src"
+BASEPATH="/home/sidhshar/repo/istio-explore/employee_v5/src"
 
 cd $BASEPATH/reviews
 docker run --rm -v `pwd`:/usr/bin/app:rw niaquinto/gradle clean build

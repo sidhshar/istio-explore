@@ -67,6 +67,12 @@ def get_book_details(id, headers)
     return {
         'id' => id,
         'type' => 'Employee',
+        'salary':{
+            '2018': { '01': '11000', '02': '12000' }
+          },
+        'pf': {
+            '2018': { '01': '1100', '02': '1100' }
+          },
         'pages' => 'A9-1',
         'publisher' => 'SJC 19/4',
         'language' => 'Bret',

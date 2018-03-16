@@ -48,6 +48,41 @@ spec:
         - containerPort: 9080
 ---
 ##################################################################################################
+# Finance Details service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: financedetails
+  labels:
+    app: financedetails
+spec:
+  ports:
+  - port: 9080
+    name: http
+  selector:
+    app: financedetails
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: financedetails-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: financedetails
+        version: v2
+    spec:
+      containers:
+      - name: financedetails
+        image: sidhshar/examples-bookinfo-financedetails-v1:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9080
+---
+##################################################################################################
 # Ratings service
 ##################################################################################################
 apiVersion: v1

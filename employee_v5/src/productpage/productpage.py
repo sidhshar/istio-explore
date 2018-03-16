@@ -50,6 +50,12 @@ details = {
     "children" : []
 }
 
+financedetails = {
+    "name" : "http://financedetails:9080",
+    "endpoint" : "financedetails",
+    "children" : []
+}
+
 ratings = {
     "name" : "http://ratings:9080",
     "endpoint" : "ratings",
@@ -158,7 +164,8 @@ def employeeFront():
     detailsStatus, details = getProductDetails(product_id, headers)
     reviewsStatus, reviews = getProductReviews(product_id, headers)
 
-    financeStatus, financeData = 200, {'type':'financeData'}
+    #financeStatus, financeData = 200, {'type':'financeData'}
+    financeStatus, financeData = getFinanceDetails(product_id, headers)
     profileStatus, profileData = 200, {'type':'profileData'}
 
     return render_template(
@@ -234,6 +241,18 @@ def getProductDetails(product_id, headers):
     else:
         status = res.status_code if res is not None and res.status_code else 500
         return status, {'error': 'Sorry, E details are currently unavailable for this book.'}
+
+def getFinanceDetails(product_id, headers):
+    try:
+        url = financedetails['name'] + "/" + financedetails['endpoint'] + "/" + str(product_id)
+        res = requests.get(url, headers=headers, timeout=3.0)
+    except:
+        res = None
+    if res and res.status_code == 200:
+        return 200, res.json()
+    else:
+        status = res.status_code if res is not None and res.status_code else 500
+        return status, {'error': 'Sorry, Finance details are currently unavailable for this book.'}
 
 
 def getProductReviews(product_id, headers):

@@ -123,22 +123,30 @@ $('#login-modal').on('shown.bs.modal', function () {
       {% endif %}
     </div>
 
+    {% if user %}
     <div class="col-md-6">
       <h4 class="text-center text-primary">Routed Details</h4>
+      {% if financeData.salary %}
+        <blockquote>
+          <p>Finance Details</p>
+          <small>{{ financeData.salary }}</small>
+        </blockquote>
+      {% endif %}
+      {% if workexpData.workexp %}
+        <blockquote>
+          <p>WorkExp Details</p>
+          <small>{{ workexpData.workexp }}</small>
+        </blockquote>
+      {% endif %}
+      {% if hrData.salary %}
       <blockquote>
-        <p>Finance Details</p>
-        <small>{{ financeData.salary }}</small>
-      </blockquote>
-      <blockquote>
-        <p>WorkExp Details</p>
-        <small>{{ workexpData.workexp }}</small>
-      </blockquote>
-      <blockquote>
-        <p>HR Details</p>
-        <small>{{ hrData.salary }}</small>
-        <small>{{ hrData.workexp }}</small>
-      </blockquote>
+          <p>HR Details</p>
+          <small>{{ hrData.salary }}</small>
+          <small>{{ hrData.workexp }}</small>
+        </blockquote>
+      {% endif %}
     </div>
+    {% endif %}
   </div>
 
   <!--

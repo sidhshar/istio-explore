@@ -1,0 +1,20 @@
+apiVersion: config.istio.io/v1alpha2
+kind: RouteRule
+metadata:
+  name: financedetails-hr-abort
+spec:
+  destination:
+    name: hrdetails
+  precedence: 2
+  match:
+    request:
+      headers:
+        cookie:
+          regex: "^(.*?;)?(user=finance)(;.*)?$"
+  route:
+  - labels:
+      version: v1
+  httpFault:
+    abort:
+      percent: 100
+      httpStatus: 500

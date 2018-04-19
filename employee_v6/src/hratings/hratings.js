@@ -132,6 +132,10 @@ function getLocalReviews (productId) {
       'Q2FY18': 4,
       'Q4FY17': 2,
       'Q2FY17': 1,
+    },
+    hratings: {
+      'basicSal': 200,
+      'bonus': 100
     }
   }
 }

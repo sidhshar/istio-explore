@@ -223,6 +223,41 @@ spec:
         - containerPort: 9080
 ---
 ##################################################################################################
+# HRatings service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: hratings
+  labels:
+    app: hratings
+spec:
+  ports:
+  - port: 9080
+    name: http
+  selector:
+    app: hratings
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: hratings-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hratings
+        version: v1
+    spec:
+      containers:
+      - name: hratings
+        image: sidhshar/examples-bookinfo-hratings-v1:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9080
+---
+##################################################################################################
 # Reviews service
 ##################################################################################################
 apiVersion: v1

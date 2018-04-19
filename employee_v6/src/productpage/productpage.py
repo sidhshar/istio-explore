@@ -80,6 +80,12 @@ ratings = {
     "children" : []
 }
 
+hratings = {
+    "name" : "http://hratings:9080",
+    "endpoint" : "hratings",
+    "children" : []
+}
+
 reviews = {
     "name" : "http://reviews:9080",
     "endpoint" : "reviews",
@@ -189,6 +195,7 @@ def employeeFront():
 
     # NodeJs based endpoint
     ratingStatus, ratings = getProductRatings(product_id, headers)
+    hratingStatus, hratings = getProductHratings(product_id, headers)
     finStatus, finData = getFinDetails(product_id, headers)
 
     return render_template(
@@ -204,6 +211,7 @@ def employeeFront():
         reviews=reviews,
         financeData=financeData,
         ratings=ratings,
+        hratings=hratings,
         finData=finData,
         workexpData=workexpData,
         hrData=hrData,
@@ -346,6 +354,20 @@ def getProductRatings(product_id, headers):
     else:
         status = res.status_code if res is not None and res.status_code else 500
         return status, {'error': 'Sorry, E ratings are currently unavailable for this book.'}
+
+def getProductHratings(product_id, headers):
+    try:
+        url = hratings['name'] + "/" + hratings['endpoint'] + "/" + str(product_id)
+        res = requests.get(url, headers=headers, timeout=3.0)
+    except:
+        res = None
+    if res and res.status_code == 200:
+        return 200, res.json()
+    else:
+        status = res.status_code if res is not None and res.status_code else 500
+        return status, {'error': 'Sorry, E hratings are currently unavailable for this book.'}
+
+
 
 class Writer(object):
     def __init__(self, filename):

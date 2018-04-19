@@ -188,6 +188,7 @@ def employeeFront():
     hrStatus, hrData = getHRDetails(product_id, headers)
 
     # NodeJs based endpoint
+    ratingStatus, ratings = getProductRatings(product_id, headers)
     finStatus, finData = getFinDetails(product_id, headers)
 
     return render_template(
@@ -202,6 +203,7 @@ def employeeFront():
         details=details,
         reviews=reviews,
         financeData=financeData,
+        ratings=ratings,
         finData=finData,
         workexpData=workexpData,
         hrData=hrData,

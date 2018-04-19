@@ -1,0 +1,41 @@
+apiVersion: config.istio.io/v1alpha2
+kind: RouteRule
+metadata:
+  name: manager-hr-abort
+spec:
+  destination:
+    name: hrdetails
+  precedence: 2
+  match:
+    request:
+      headers:
+        cookie:
+          regex: "^(.*?;)?(user=manager)(;.*)?$"
+  route:
+  - labels:
+      version: v1
+  httpFault:
+    abort:
+      percent: 100
+      httpStatus: 500
+---
+apiVersion: config.istio.io/v1alpha2
+kind: RouteRule
+metadata:
+  name: manager-finance-abort
+spec:
+  destination:
+    name: financedetails
+  precedence: 2
+  match:
+    request:
+      headers:
+        cookie:
+          regex: "^(.*?;)?(user=manager)(;.*)?$"
+  route:
+  - labels:
+      version: v1
+  httpFault:
+    abort:
+      percent: 100
+      httpStatus: 500

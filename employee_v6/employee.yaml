@@ -83,6 +83,41 @@ spec:
         - containerPort: 9080
 ---
 ##################################################################################################
+# Fin Details service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: findetails
+  labels:
+    app: findetails
+spec:
+  ports:
+  - port: 9080
+    name: http
+  selector:
+    app: findetails
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: findetails-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: findetails
+        version: v1
+    spec:
+      containers:
+      - name: findetails
+        image: sidhshar/examples-bookinfo-findetails-v1:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9080
+---
+##################################################################################################
 # Work Exp Details service
 ##################################################################################################
 apiVersion: v1

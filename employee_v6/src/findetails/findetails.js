@@ -132,7 +132,7 @@ dispatcher.onGet(/^\/findetails\/[0-9]*/, function (req, res) {
 
 dispatcher.onGet('/health', function (req, res) {
   res.writeHead(200, {'Content-type': 'application/json'})
-  res.end(JSON.stringify({status: 'Ratings is healthy'}))
+  res.end(JSON.stringify({status: 'findetails is healthy'}))
 })
 
 function getLocalReviews (productId) {

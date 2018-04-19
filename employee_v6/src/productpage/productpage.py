@@ -56,6 +56,12 @@ financedetails = {
     "children" : []
 }
 
+findetails = {
+    "name" : "http://findetails:9080",
+    "endpoint" : "findetails",
+    "children" : []
+}
+
 workexpdetails = {
     "name" : "http://workexpdetails:9080",
     "endpoint" : "workexpdetails",
@@ -181,6 +187,9 @@ def employeeFront():
     workexpStatus, workexpData = getWorkExpDetails(product_id, headers)
     hrStatus, hrData = getHRDetails(product_id, headers)
 
+    # NodeJs based endpoint
+    finStatus, finData = getFinDetails(product_id, headers)
+
     return render_template(
         'employeepage.html',
         detailsStatus=detailsStatus,
@@ -268,6 +277,19 @@ def getFinanceDetails(product_id, headers):
     else:
         status = res.status_code if res is not None and res.status_code else 500
         return status, {'error': 'Sorry, Finance details are currently unavailable for this employee.'}
+
+def getFinDetails(product_id, headers):
+    try:
+        url = findetails['name'] + "/" + findetails['endpoint'] + "/" + str(product_id)
+        res = requests.get(url, headers=headers, timeout=3.0)
+    except:
+        res = None
+    if res and res.status_code == 200:
+        return 200, res.json()
+    else:
+        status = res.status_code if res is not None and res.status_code else 500
+        return status, {'error': 'Sorry, Fin details are currently unavailable for this employee.'}
+
 
 def getWorkExpDetails(product_id, headers):
     try:

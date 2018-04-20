@@ -1,5 +1,5 @@
 
-BASEPATH="/home/sidhshar/repo/istio-explore/employee_v5/src"
+BASEPATH="/home/sidhshar/repo/istio-explore/employee_v6/src"
 
 cd $BASEPATH/productpage
 

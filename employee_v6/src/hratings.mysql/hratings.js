@@ -72,9 +72,9 @@ dispatcher.onGet(/^\/hratings\/[0-9]*/, function (req, res) {
           var result = {
             id: productId,
             ratings: {
-              Q2FY18: firstRating,
-              Q4FY17: secondRating,
-              Q2FY17: thirdRating
+              Jan2018: firstRating,
+              Feb2018: secondRating,
+              March2018: thirdRating
             }
           }
           res.writeHead(200, {'Content-type': 'application/json'})
@@ -100,9 +100,9 @@ dispatcher.onGet(/^\/hratings\/[0-9]*/, function (req, res) {
               var result = {
                 id: productId,
                 ratings: {
-                  Q2FY18: firstRating,
-                  Q4FY17: secondRating,
-                  Q2FY17: thirdRating
+                  Jan2018: firstRating,
+                  Feb2018: secondRating,
+                  March2018: thirdRating
                 }
               }
               res.writeHead(200, {'Content-type': 'application/json'})
@@ -122,16 +122,16 @@ dispatcher.onGet(/^\/hratings\/[0-9]*/, function (req, res) {
 
 dispatcher.onGet('/health', function (req, res) {
   res.writeHead(200, {'Content-type': 'application/json'})
-  res.end(JSON.stringify({status: 'HRatings is healthy'}))
+  res.end(JSON.stringify({status: 'HRatings v2 is healthy'}))
 })
 
 function getLocalReviews (productId) {
   return {
     id: productId,
     ratings: {
-      'Q2FY18': 4,
-      'Q4FY17': 2,
-      'Q2FY17': 1,
+      'Jan2018': 12111,
+      'Feb2018': 12222,
+      'March2018': 12333,
     },
     hratings: {
       1: 200,

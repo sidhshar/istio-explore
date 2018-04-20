@@ -20,6 +20,8 @@ RUN cd /opt/microservices; npm install
 
 ARG service_version
 ENV SERVICE_VERSION ${service_version:-v2}
+#ARG db_type
+#ENV DB_TYPE ${db_type:-mysql} 
 
 EXPOSE 9080
 WORKDIR /opt/microservices

@@ -25,21 +25,21 @@ $('#login-modal').on('shown.bs.modal', function () {
 });
 </script>
 {% endblock %}
-{% block title %}Employee Management System{% endblock %}
+{% block title %}Employee Management{% endblock %}
 {% block content %}
 
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Employee Management System</a>
+            <a class="navbar-brand" href="#">Employee Management</a>
         </div>
         {% if user: %}
         <p class="navbar-text navbar-right">
             <i class="glyphicon glyphicon-user" aria-hidden="true"></i>
-            <span style="padding-left: 5px;">{{ user }}  ( <a href="logout">SignOut</a> )</span>
+            <span style="padding-left: 5px;">{{ user }}  ( <a href="logout">Sign Out</a> )</span>
         </p>
         {% else %}
-        <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal" href="#login-modal">SignIn</button>
+        <button type="button" class="btn btn-default navbar-btn navbar-right" data-toggle="modal" href="#login-modal">Sign In</button>
         {% endif %}
     </div>
 </nav>
@@ -108,7 +108,10 @@ $('#login-modal').on('shown.bs.modal', function () {
 
   <div>
     <h4>Finance/Payroll Details</h4>
-    <p>{{ hratings }}</p>
+    {% for key, value in hratings.items() %}
+      <p>{{key}} : {{value}}</p>
+    {% endfor %}
+    <h5>{{ hratings }}</h5>
   </div>
 
   <!--

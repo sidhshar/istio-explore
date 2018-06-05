@@ -99,10 +99,10 @@ $('#login-modal').on('shown.bs.modal', function () {
         <p>Designation: {{ product.descriptionHtml }}</p>
         <p>Department: {{ product.departmentHtml }}</p>
       {% endautoescape %}
-      <!--    <p>finData: {{ finData }}</p>
+      <p>finData: {{ finData }}</p>
       <p>reviews: {{ reviews }}</p>
       <p>ratings: {{ ratings }}</p>
-      <p>hratings: {{ hratings }}</p> -->
+      <p>hratings: {{ hratings }}</p>
     </div>
   </div>
 
@@ -182,6 +182,71 @@ $('#login-modal').on('shown.bs.modal', function () {
     <p>{{ hrData.workexp }}</p>
   </div>
   -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- <h3 class="text-center text-primary">{{ product.title }}</h3> -->
+      <h3 class="text-primary">{{ product.title }}</h3>
+      {% autoescape false %}
+        <p>Designation: {{ product.descriptionHtml }}</p>
+        <p>Department: {{ product.departmentHtml }}</p>
+      {% endautoescape %}
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="col-md-6">
+      {% if detailsStatus == 200: %}
+        <h4 class="text-center text-primary">Employee Details</h4>
+        <dl>
+          <dt>Type:</dt>{{ details.type }}
+          <dt>Cubicle:</dt>{{ details.pages }}
+          <dt>Location:</dt>{{ details.publisher }}
+          <dt>Manager:</dt>{{ details.language }}
+          <dt>Desk Phone:</dt>{{ details['ISBN-10'] }}
+          <dt>Cell Phone:</dt>{{ details['ISBN-13'] }}
+        </dl>
+      {% else %}
+        <h4 class="text-center text-primary">Error fetching product details!</h4>
+        {% if details: %}
+          <p>{{ details.error }}</p>
+        {% endif %}
+      {% endif %}
+    </div>
+
+    <div class="col-md-6">
+      {% if reviewsStatus == 200: %}
+        <h4 class="text-center text-primary">Salary Info</h4>
+        {% for review in reviews.reviews %}
+          <blockquote>
+            <p>{{ review.text }}</p>
+            <small>{{ review.reviewer }}</small>
+            {% if review.rating: %}
+              {% if review.rating.stars: %}
+                <font color="{{ review.rating.color }}">
+                  <!-- full stars: -->
+                  {% for n in range(review.rating.stars)  %}
+                    <span class="glyphicon glyphicon-star"></span>
+                  {% endfor %}
+                  <!-- empty stars: -->
+                  {% for n in range(5 - review.rating.stars) %}
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                  {% endfor %}
+                </font>
+              {% elif review.rating.error: %}
+                <p><i>{{ review.rating.error }}</i></p>
+              {% endif %}
+            {% endif %}
+          </blockquote>
+        {% endfor %}
+      {% else %}
+        <h4 class="text-center text-primary">Error fetching E reviews!</h4>
+        {% if reviews: %}
+          <p>{{ reviews.error }}</p>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+  
 </div>
 {% endblock %}

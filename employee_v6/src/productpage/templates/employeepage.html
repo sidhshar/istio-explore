@@ -113,6 +113,7 @@ $('#login-modal').on('shown.bs.modal', function () {
     {% endfor %}
     <!-- <h5>{{ hratings }}</h5> -->
   </div>
+  </div>
 
   <!--
   <div class="row">
@@ -186,7 +187,7 @@ $('#login-modal').on('shown.bs.modal', function () {
   <div class="row">
     <div class="col-md-12">
       <!-- <h3 class="text-center text-primary">{{ product.title }}</h3> -->
-      <h3 class="text-primary">{{ product.title }}</h3>
+      <h3 class="text-primary">TODO REMOVE ME AFTER TESTING ---   {{ product.title }}</h3>
       {% autoescape false %}
         <p>Designation: {{ product.descriptionHtml }}</p>
         <p>Department: {{ product.departmentHtml }}</p>
@@ -247,6 +248,5 @@ $('#login-modal').on('shown.bs.modal', function () {
       {% endif %}
     </div>
   </div>
-  
 </div>
 {% endblock %}

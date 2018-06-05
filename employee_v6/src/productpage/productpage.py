@@ -111,9 +111,9 @@ def getForwardHeaders(request):
     is_allowed_cookie = request.cookies.get("x-is-allowed-c")
     if is_allowed_cookie and user_cookie:
         headers['Cookie'] = 'user=' + user_cookie + '; x-is-allowed-c=' + is_allowed_cookie
-    else if user_cookie:
+    elif user_cookie:
         headers['Cookie'] = 'user=' + user_cookie
-    else if is_allowed_cookie:
+    elif is_allowed_cookie:
         headers['Cookie'] = 'x-is-allowed-c=' + is_allowed_cookie
 
     incoming_headers = [ 'x-request-id',

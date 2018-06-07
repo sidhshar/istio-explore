@@ -104,6 +104,30 @@ service_dict = {
     "reviews" : reviews,
 }
 
+def getForwardHeadersOnlyHeader(request):
+    headers = {}
+
+    user_cookie = request.cookies.get("user")
+    if user_cookie:
+        headers['Cookie'] = 'user=' + user_cookie
+
+    incoming_headers = [ 'x-request-id',
+                         'x-b3-traceid',
+                         'x-b3-spanid',
+                         'x-b3-parentspanid',
+                         'x-b3-sampled',
+                         'x-b3-flags',
+                         'x-ot-span-context',
+                         'x-is-allowed'
+    ]
+
+    for ihdr in incoming_headers:
+        val = request.headers.get(ihdr)
+        if val is not None:
+            headers[ihdr] = val
+
+    return headers
+
 def getForwardHeaders(request):
     headers = {}
 
@@ -126,12 +150,17 @@ def getForwardHeaders(request):
                          'x-is-allowed'
     ]
 
+    print 'In getForwardHeaders -->>>>> Printing all incoming headers...'
+    for k, v in request.headers.items():
+        print 'k: %s, v: %s' % (k, v,)
+
     for ihdr in incoming_headers:
         val = request.headers.get(ihdr)
         if val is not None:
             headers[ihdr] = val
             #print "incoming: "+ihdr+":"+val
 
+    print 'Exiting getForwardHeaders.........'
     return headers
 
 

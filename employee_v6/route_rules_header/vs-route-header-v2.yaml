@@ -8,8 +8,8 @@ spec:
   http:
   - match:
     - headers:
-        cookie:
-          regex: "^(.*?;)?(x-is-allowed-c=enabled)(;.*)?$"
+        x-is-allowed:
+          exact: enabled
     route:
     - destination:
         host: reviews

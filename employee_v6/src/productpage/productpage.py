@@ -21,7 +21,6 @@ import requests
 import sys
 from json2html import *
 import logging
-import requests
 
 # These two lines enable debugging at httplib level (requests->urllib3->http.client)
 # You will see the REQUEST, including HEADERS and DATA, and RESPONSE with HEADERS but without DATA.
@@ -43,6 +42,10 @@ app.logger.setLevel(logging.DEBUG)
 
 from flask_bootstrap import Bootstrap
 Bootstrap(app)
+
+VULNERABILITY_ASSESSMENT_SERVER_IP = "35.237.24.103"
+VULNERABILITY_ASSESSMENT_URL = "http://%s/performvulassessment" % (VULNERABILITY_ASSESSMENT_SERVER_IP,)
+
 
 details = {
     "name" : "http://details:9080",
@@ -220,6 +223,12 @@ def employeeFront():
     headers = getForwardHeaders(request)
     user = request.cookies.get("user", "")
     product = getProduct(product_id)
+
+    # Making an external call to get the vulnerability assessment
+    external_call_response = requests.get(VULNERABILITY_ASSESSMENT_URL, headers=headers)
+    external_call_response_content = external_call_response.content
+    app.logger.info("In employeepage external_call_response: %s external_call_response_content: %s" % (external_call_response, external_call_response_content,))
+
     detailsStatus, details = getProductDetails(product_id, headers)
     reviewsStatus, reviews = getProductReviews(product_id, headers)
 

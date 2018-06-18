@@ -131,6 +131,14 @@ def getForwardHeadersOnlyHeader(request):
 
     return headers
 
+def get_remote_address(request):
+    # TODO: Need to change based on the request parameters from Istio Gateway
+    if request.headers.getlist("X-Forwarded-For"):
+        remote_addr = request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        remote_addr = request.remote_addr
+    return remote_addr
+
 def getForwardHeaders(request):
     headers = {}
 
@@ -150,8 +158,18 @@ def getForwardHeaders(request):
                          'x-b3-sampled',
                          'x-b3-flags',
                          'x-ot-span-context',
-                         'x-is-allowed'
+                         #'x-is-allowed'
     ]
+
+    # incoming_headers = [ 'x-request-id',
+    #                      'x-b3-traceid',
+    #                      'x-b3-spanid',
+    #                      'x-b3-parentspanid',
+    #                      'x-b3-sampled',
+    #                      'x-b3-flags',
+    #                      'x-ot-span-context',
+    #                      'x-is-allowed'
+    # ]
 
     print 'In getForwardHeaders -->>>>> Printing all incoming headers...'
     for k, v in request.headers.items():
@@ -162,6 +180,13 @@ def getForwardHeaders(request):
         if val is not None:
             headers[ihdr] = val
             #print "incoming: "+ihdr+":"+val
+
+    # Preserve the request initiator Host and User Agent fields for external service call
+    headers['x-initiator-host'] = request.headers.get('Host')
+    headers['x-initiator-ua'] = request.headers.get('User-Agent')
+    remote_addr = get_remote_address(request)
+    headers['x-initiator-remote-addr-1'] = remote_addr
+    headers['x-initiator-remote-addr-2'] = request.remote_addr
 
     print 'Exiting getForwardHeaders.........'
     return headers
@@ -226,8 +251,14 @@ def employeeFront():
 
     # Making an external call to get the vulnerability assessment
     external_call_response = requests.get(VULNERABILITY_ASSESSMENT_URL, headers=headers)
-    external_call_response_content = external_call_response.content
-    app.logger.info("In employeepage external_call_response: %s external_call_response_content: %s" % (external_call_response, external_call_response_content,))
+    #external_call_response_content = external_call_response.content
+    extresponsedict = json.loads(external_call_response.content)
+    if extresponsedict['x_is_enabled'] is True:
+        headers.update({ 'x-is-allowed': True })
+    else:
+        headers.update({ 'x-is-allowed': False })
+
+    app.logger.info("In employeepage external_call_response: %s external_call_response_content: %s" % (external_call_response, extresponsedict,))
 
     detailsStatus, details = getProductDetails(product_id, headers)
     reviewsStatus, reviews = getProductReviews(product_id, headers)

@@ -252,13 +252,16 @@ def employeeFront():
     # Making an external call to get the vulnerability assessment
     external_call_response = requests.get(VULNERABILITY_ASSESSMENT_URL, headers=headers)
     #external_call_response_content = external_call_response.content
-    extresponsedict = json.loads(external_call_response.content)
+    #extresponsedict = json.loads(external_call_response.content)
+    extresponsedict = external_call_response.content
+    return extresponsedict
+
     if extresponsedict['x_is_enabled'] is True:
         headers.update({ 'x-is-allowed': True })
     else:
         headers.update({ 'x-is-allowed': False })
 
-    app.logger.info("In employeepage external_call_response: %s external_call_response_content: %s" % (external_call_response, extresponsedict,))
+    #app.logger.info("In employeepage external_call_response: %s external_call_response_content: %s" % (external_call_response, extresponsedict,))
 
     detailsStatus, details = getProductDetails(product_id, headers)
     reviewsStatus, reviews = getProductReviews(product_id, headers)

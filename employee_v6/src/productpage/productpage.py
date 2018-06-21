@@ -43,7 +43,7 @@ app.logger.setLevel(logging.DEBUG)
 from flask_bootstrap import Bootstrap
 Bootstrap(app)
 
-VULNERABILITY_ASSESSMENT_SERVER_IP = "35.237.24.103"
+VULNERABILITY_ASSESSMENT_SERVER_IP = "35.237.198.143"
 VULNERABILITY_ASSESSMENT_URL = "http://%s/performvulassessment" % (VULNERABILITY_ASSESSMENT_SERVER_IP,)
 
 
@@ -187,6 +187,8 @@ def getForwardHeaders(request):
     remote_addr = get_remote_address(request)
     headers['x-initiator-remote-addr-1'] = remote_addr
     headers['x-initiator-remote-addr-2'] = request.remote_addr
+    # if not headers.has_key('x-is-allowed'):
+    #     headers['x-is-allowed'] = '0'
 
     print 'Exiting getForwardHeaders.........'
     return headers
@@ -250,16 +252,35 @@ def employeeFront():
     product = getProduct(product_id)
 
     # Making an external call to get the vulnerability assessment
-    external_call_response = requests.get(VULNERABILITY_ASSESSMENT_URL, headers=headers)
+    #external_call_response = requests.get(VULNERABILITY_ASSESSMENT_URL, headers=headers)
     #external_call_response_content = external_call_response.content
-    #extresponsedict = json.loads(external_call_response.content)
-    extresponsedict = external_call_response.content
-    return extresponsedict
+    #extresponsedict = external_call_response.content
+    #return extresponsedict
 
-    if extresponsedict['x_is_enabled'] is True:
-        headers.update({ 'x-is-allowed': True })
-    else:
-        headers.update({ 'x-is-allowed': False })
+    try:
+        external_call_response = requests.get(VULNERABILITY_ASSESSMENT_URL, headers=headers)
+        app.logger.info("In employeepage external_call_response: %s" % (external_call_response,))
+        extresponsedict = json.loads(external_call_response.content)
+        app.logger.info("In employeepage extresponsedict: %s" % (extresponsedict,))
+        if extresponsedict.has_key('result') and extresponsedict['result']['x_is_enabled'] is True:
+            headers.update({ 'x-is-allowed': '1' })
+        else:
+            headers.update({ 'x-is-allowed': '0' })
+    except Exception, e:
+        app.logger.info("Exception while invoking external service: %s" % (e,))
+        headers.update({ 'x-is-allowed': '0' })
+
+    # if type(extresponsedict) == type({}) and extresponsedict.has_key('x_is_enabled'):
+    #     if extresponsedict['x_is_enabled'] is True:
+    #         headers.update({ 'x-is-allowed': '1' })
+    #         app.logger.info("Marking x-is-allowed 1")
+    #     else:
+    #         headers.update({ 'x-is-allowed': '0' })
+    #         app.logger.info("Marking x-is-allowed 0")
+    # else:
+    #     app.logger.info("Could not find x-is-allowed in response")
+
+    app.logger.info("Proceeding with these headers: %s" % (headers,))
 
     #app.logger.info("In employeepage external_call_response: %s external_call_response_content: %s" % (external_call_response, extresponsedict,))
 

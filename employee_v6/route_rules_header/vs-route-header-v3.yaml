@@ -8,8 +8,8 @@ spec:
   http:
   - match:
     - headers:
-        x-is-allowed:
-          exact: "1"
+        via:
+          regex: "^/(?:.*?)/?wsa(?:/.*)?$"
     route:
     - destination:
         host: reviews

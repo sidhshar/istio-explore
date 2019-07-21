@@ -1,5 +1,5 @@
 requests
-flask==0.12.4
+flask==1.1.1
 flask_json
 flask_bootstrap
 json2html
